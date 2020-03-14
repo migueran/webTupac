@@ -1,0 +1,6 @@
+C:\Proyecto2020\Data Access\Data Access\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
+C:\Proyecto2020\Data Access\Data Access\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
+C:\Proyecto2020\Data Access\Data Access\bin\Debug\Data Access.dll
+C:\Proyecto2020\Data Access\Data Access\bin\Debug\Data Access.pdb
+C:\Proyecto2020\Data Access\Data Access\obj\Debug\Data Access.dll
+C:\Proyecto2020\Data Access\Data Access\obj\Debug\Data Access.pdb
