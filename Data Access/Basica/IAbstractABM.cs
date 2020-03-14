@@ -8,8 +8,6 @@ namespace Basica
         void Modify();
         void Erase();
         string Find();
-        bool Exists();
         List<T> List();
-
     }
 }

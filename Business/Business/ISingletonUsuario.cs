@@ -9,7 +9,8 @@ namespace Business
     {
         bool MailExists(Usuario data);
         bool DNIExists(Usuario data);
-        void Login(Usuario data);
+        string Login(Usuario data);
+
 
     }
 }

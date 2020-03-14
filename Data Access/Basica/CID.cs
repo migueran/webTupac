@@ -68,8 +68,7 @@ namespace Basica
         }
 
         public abstract void Erase();
-   
-        public abstract bool Exists();
+
         public abstract string Find();
 
         public void InitPrefix()

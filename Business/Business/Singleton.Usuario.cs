@@ -40,17 +40,35 @@ namespace Business
 
         string ISingletonGeneric<Usuario>.Find(Usuario data)
         {
-            throw new NotImplementedException();
+            CreateCommand("usuarios_find");
+            ParameterAddInt("id", data.Id);
+            DataRow DR = Find("Error: No se pudo encontrar usuario.");
+            ISU.MakeObject(DR, data);
+            return data.RowToJSON(DR);
         }
 
         List<Usuario> ISingletonGeneric<Usuario>.List(Usuario data)
         {
-            throw new NotImplementedException();
+            List<Usuario> Usuarios = new List<Usuario>();
+            CreateCommand("usuarios_list");
+            DataTable DT = List("Error: No se pudo encontrar usuarios");
+            foreach (DataRow DR in DT.Rows)
+            {
+                Usuario Usuario = new Usuario();
+                ISU.MakeObject(DR, Usuario);
+                Usuarios.Add(Usuario);
+            }
+            return Usuarios;
         }
 
-        void ISingletonUsuario.Login(Usuario data)
+        string ISingletonUsuario.Login(Usuario data)
         {
-            throw new NotImplementedException();
+            CreateCommand("usuarios_login");
+            ParameterAddVarchar("mail", 80, data.Mail);
+            ParameterAddVarchar("password", 40, data.Password);
+            DataRow DR = Find("Error: No se pudo encontrar usuario");
+            ISU.MakeObject(DR, data);
+            return data.RowToJSON(DR);
         }
 
         bool ISingletonUsuario.MailExists(Usuario data)
@@ -63,7 +81,17 @@ namespace Business
 
         void ISingletonGeneric<Usuario>.MakeObject(DataRow DR, Usuario data)
         {
-            throw new NotImplementedException();
+            data.Id = int.Parse(DR["id"].ToString());
+            data.Nombre = DR["nombre"].ToString();
+            data.DNI = int.Parse(DR["dni"].ToString());
+            data.Domicilio = DR["domicilio"].ToString();
+            data.Telefono = DR["telefono"].ToString();
+            data.Mail = DR["mail"].ToString();
+            data.FechaNac = DateTime.Parse(DR["fechanac"].ToString());
+            data.Password = DR["password"].ToString();
+            data.Estudios = DR["estudios"].ToString();
+            data.MateriasAdeudadas = DR["materiasadeudadas"].ToString();
+
         }
 
         void ISingletonGeneric<Usuario>.Modify(Usuario data)

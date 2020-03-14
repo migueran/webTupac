@@ -39,6 +39,7 @@ namespace Business
             this.Password = this.DNI.ToString();
             this.Dispersar();
             ISU.Add(this);
+            SaveImage();
         }
 
         public void Dispersar()
@@ -79,10 +80,6 @@ namespace Business
             ISU.Erase(this);
         }
 
-        public override bool Exists()
-        {
-            return ISU.Exists(this);
-        }
 
         public override string Find()
         {
@@ -94,9 +91,10 @@ namespace Business
             return ISU.List(this);
         }
 
-        public void Login()
+        public string Login()
         {
-            ISU.Login(this);
+            return ISU.Login(this);
+            
         }
 
         public bool MailExists()
@@ -119,6 +117,7 @@ namespace Business
                 this.Dispersar();
             }
             ISU.Modify(this);
+            SaveImage();
         }
     }
 }

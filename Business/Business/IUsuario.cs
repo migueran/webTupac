@@ -12,7 +12,7 @@ namespace Business
         string Password { get; set; }
         string Estudios { get; set; }
         string MateriasAdeudadas { get; set; }
-        void Login();
+        string Login();
         bool MailExists();
         bool DNIExists();
         void Dispersar();

@@ -13,7 +13,7 @@ namespace Business
 
         public override void Add()
         {
-            if (Exists()) {
+            if (RolExists()) {
                 throw new Exception("Error: Ya se ha ingresado el mismo rol en este usuario");
             }
             ISUR.Add(this);
@@ -22,11 +22,6 @@ namespace Business
         public override void Erase()
         {
             ISUR.Erase(this);
-        }
-
-        public override bool Exists() //corregir, si existe rol!!!!
-        {
-            return ISUR.Exists(this);
         }
 
         public override string Find()
@@ -46,7 +41,7 @@ namespace Business
 
         public override void Modify()
         {
-            if (Exists())
+            if (RolExists())
             {
                 throw new Exception("Error: Ya se ha ingresado el mismo rol en este usuario");
             }
