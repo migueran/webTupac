@@ -9,8 +9,7 @@ namespace Basica
         void Add(T data);
         void Modify(T data);
         void Erase(T data);
-        void Find(T data);
-        bool Exists(T data);
+        string Find(T data);        
         List<T> List(T data);
         void MakeObject(DataRow DR, T data);
     }

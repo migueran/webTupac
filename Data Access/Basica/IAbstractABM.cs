@@ -7,7 +7,7 @@ namespace Basica
         void Add();
         void Modify();
         void Erase();
-        void Find();
+        string Find();
         bool Exists();
         List<T> List();
 

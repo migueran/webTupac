@@ -77,6 +77,21 @@ create procedure usuarios_update(
 @materiasadeudadas varchar(200)
 )
 as 
+if @password ='' 
+begin
+update usuarios set 
+nombre=@nombre,
+dni=@dni,
+domicilio=@domicilio,
+telefono=@telefono,
+mail=@mail,
+fechanac=@fechanac,
+estudios=@estudios,
+materiasadeudadas=@materiasadeudadas
+where id=@id
+end
+else
+begin
 update usuarios set 
 nombre=@nombre,
 dni=@dni,
@@ -88,6 +103,7 @@ password=@password,
 estudios=@estudios,
 materiasadeudadas=@materiasadeudadas
 where id=@id
+end
 go
 
 create procedure usuarios_delete(@id int)

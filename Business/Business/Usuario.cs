@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using Basica;
-
+using System.Security.Cryptography;
 
 namespace Business
 {
@@ -27,52 +28,97 @@ namespace Business
 
         public override void Add()
         {
-            throw new NotImplementedException();
+            if (MailExists())
+            {
+                throw new Exception("Existe otro usuario con el mismo Mail");
+            }
+            if (DNIExists())
+            {
+                throw new Exception("Existe otro usuario con el mismo DNI");
+            }
+            this.Password = this.DNI.ToString();
+            this.Dispersar();
+            ISU.Add(this);
         }
 
-        public string Dispersar(string Password)
+        public void Dispersar()
         {
-            throw new NotImplementedException();
+            UTF8Encoding enc = new UTF8Encoding();
+            byte[] data = enc.GetBytes(this.Password);
+            byte[] result;
+
+            SHA1CryptoServiceProvider sha = new SHA1CryptoServiceProvider();
+
+            result = sha.ComputeHash(data);
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < result.Length; i++)
+            {
+
+                // Convertimos los valores en hexadecimal
+                // cuando tiene una cifra hay que rellenarlo con cero
+                // para que siempre ocupen dos dígitos.
+                if (result[i] < 16)
+                {
+                    sb.Append("0");
+                }
+                sb.Append(result[i].ToString("x"));
+            }
+
+            //Devolvemos la cadena con el hash en mayúsculas para que quede más chuli 🙂
+            this.Password = sb.ToString().ToUpper();
         }
 
         public bool DNIExists()
         {
-            throw new NotImplementedException();
+            return ISU.DNIExists(this);
         }
 
         public override void Erase()
         {
-            throw new NotImplementedException();
+            ISU.Erase(this);
         }
 
         public override bool Exists()
         {
-            throw new NotImplementedException();
+            return ISU.Exists(this);
         }
 
-        public override void Find()
+        public override string Find()
         {
-            throw new NotImplementedException();
+            return ISU.Find(this);
         }
 
         public override List<Usuario> List()
         {
-            throw new NotImplementedException();
+            return ISU.List(this);
         }
 
         public void Login()
         {
-            throw new NotImplementedException();
+            ISU.Login(this);
         }
 
         public bool MailExists()
         {
-            throw new NotImplementedException();
+            return ISU.MailExists(this);
         }
 
         public override void Modify()
         {
-            throw new NotImplementedException();
+            if (MailExists())
+            {
+                throw new Exception("Existe otro usuario con el mismo Mail");
+            }
+            if (DNIExists())
+            {
+                throw new Exception("Existe otro usuario con el mismo DNI");
+            }
+            if (Password != "")
+            {
+                this.Dispersar();
+            }
+            ISU.Modify(this);
         }
     }
 }

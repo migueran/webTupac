@@ -15,6 +15,6 @@ namespace Business
         void Login();
         bool MailExists();
         bool DNIExists();
-        string Dispersar(string Password);
+        void Dispersar();
     }
 }

@@ -22,7 +22,7 @@ namespace Business
             throw new NotImplementedException();
         }
 
-        void ISingletonGeneric<UsuarioRol>.Find(UsuarioRol data)
+        string ISingletonGeneric<UsuarioRol>.Find(UsuarioRol data)
         {
             throw new NotImplementedException();
         }

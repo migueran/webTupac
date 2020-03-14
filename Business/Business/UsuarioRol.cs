@@ -29,9 +29,9 @@ namespace Business
             return ISUR.Exists(this);
         }
 
-        public override void Find()
+        public override string Find()
         {
-            ISUR.Find(this);
+           return ISUR.Find(this);
         }
 
         public override List<UsuarioRol> List()
