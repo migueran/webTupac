@@ -14,7 +14,7 @@ namespace Basica
         public string Prefix { get; set; }
 
         public string Path {
-            get { return AppDomain.CurrentDomain.BaseDirectory + this.Directory + "\\" + this.Prefix + this.Id + ".jpg"; }
+            get { return AppDomain.CurrentDomain.BaseDirectory+ "imagenes\\" + this.Directory + "\\" + this.Prefix + this.Id + ".jpg"; }
         }
 
         public string URL {
@@ -22,15 +22,15 @@ namespace Basica
                 InitPrefix();
                 if(File.Exists(Path))
                 {
-                    return this.Directory + "/" + this.Prefix + this.Id + ".jpg";
+                    return "imagenes/"+this.Directory + "/" + this.Prefix + this.Id + ".jpg";
                 }
                 ChangePrefix();
                 if (File.Exists(Path))
                 {
-                    return this.Directory + "/" + this.Prefix + this.Id + ".jpg";
+                    return "imagenes/"+this.Directory + "/" + this.Prefix + this.Id + ".jpg";
                 }
                 InitPrefix();
-                return this.Directory + "/" + this.Prefix + "default.jpg";
+                return "imagenes/"+this.Directory + "/" + this.Prefix + "default.jpg";
             }
         }
 
@@ -68,6 +68,7 @@ namespace Basica
         }
 
         public abstract void Erase();
+   
         public abstract bool Exists();
         public abstract void Find();
 
@@ -88,7 +89,13 @@ namespace Basica
             for (int i = 0; i < T.Table.Columns.Count; i++)
             {
                 JSON += "\"" + T.Table.Columns[i].ColumnName + "\":\"" + T[i] + "\",";
-                //falta analizar como devolver la imagen
+                if (this.Prefix != "")
+                {
+                    int aux = this.Id;
+                    this.Id = int.Parse(T["id"].ToString());
+                    JSON += "\"URL\":\"" + this.URL + "\",";
+                    this.Id = aux;
+                }
             }
             JSON = JSON.Remove(JSON.Length - 1) + "}";
             return JSON;
@@ -98,6 +105,7 @@ namespace Basica
         {
             if(this.FU == null) { return; }
             if (this.FU.FileName == "") { return; }
+            this.DeleteImage();
             this.FU.SaveAs(Path);
         }
 

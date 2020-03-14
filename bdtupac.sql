@@ -110,6 +110,17 @@ as
 select * from usuarios where mail=@mail and password=@password
 go
 
+create proc usuarios_mailexists(@id int, @mail varchar(80))
+as
+select count(*) from usuarios where id<>@id and mail=@mail
+go
+
+create proc usuarios_dniexists(@id int, @dni int)
+as
+select count(*) from usuarios where id<>@id and dni=@dni
+go
+
+
 create table roles(
 nombre varchar(20)primary key
 ) 
@@ -168,3 +179,7 @@ as
 select * from usuariosroles where idusuario=@idusuario
 go
 
+create proc usuariosroles_rolexists(@idusuario int, @rol varchar(20))
+as
+select count(*) from usuariosroles where idusuario=@idusuario and rol=@rol
+go
