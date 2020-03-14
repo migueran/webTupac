@@ -1,0 +1,2 @@
+C:\Proyecto2020\Data Access\Basica\obj\Debug\Basica.csprojResolveAssemblyReference.cache
+C:\Proyecto2020\Data Access\Basica\obj\Debug\Basica.csproj.CoreCompileInputs.cache

@@ -8,23 +8,23 @@ namespace DataAccess
     public interface IConnection
     {
         //definir comando
-         SqlCommand mycommand { get; set; }
-         SqlConnection myconnection { get; set; }
+         SqlCommand MyCommand { get; set; }
+         SqlConnection MyConnection { get; set; }
         
         //myconnection = new SqlConnection(ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString);
 
         //definir el contrato
-         int insert(string errMessage);
-         void update(string errMessage);
-         DataTable list(string errMessage);
-         DataRow find(string errMessage);
-         bool exists(string errMessage);
-         void createcommand(string storedprocedure);
-        void parameteraddvarchar(string nombre, int length, string value);
-        void parameteraddint(string nombre, int value);
-        void parameteradddatetime(string nombre, DateTime value);
-        void parameteraddfloat(string nombre, double value);
-        void parameteraddbool(string nombre, bool value);
-        void parameteraddtext(string nombre, string value);
+         int Insert(string errMessage);
+         void Update(string errMessage);
+         DataTable List(string errMessage);
+         DataRow Find(string errMessage);
+         bool Exists(string errMessage);
+         void CreateCommand(string storedprocedure);
+        void ParameterAddVarchar(string nombre, int length, string value);
+        void ParameterAddInt(string nombre, int value);
+        void ParameterAddDatetime(string nombre, DateTime value);
+        void ParameterAddFloat(string nombre, double value);
+        void ParameterAddBool(string nombre, bool value);
+        void ParameterAddText(string nombre, string value);
     }
 }

@@ -8,21 +8,21 @@ namespace DataAccess
 {
     public class Connection : IConnection
     {
-        public SqlCommand mycommand { get; set; }
-        public SqlConnection myconnection { get; set; }
+        public SqlCommand MyCommand { get; set; }
+        public SqlConnection MyConnection { get; set; }
 
         public Connection()
         {
-            myconnection = new SqlConnection(ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString);
+            MyConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString);
         }
 
-        private void openconnection()
+        private void OpenConnection()
         {
-            if (myconnection.State != ConnectionState.Open)
+            if (MyConnection.State != ConnectionState.Open)
             {
                 try
                 {
-                    myconnection.Open();
+                    MyConnection.Open();
                 }
                 catch (Exception)
                 {
@@ -33,13 +33,13 @@ namespace DataAccess
 
 
         //Se definirá la conexión "myconnection" 
-        public bool exists(string errMessage)
+        public bool Exists(string errMessage)
         {
-            openconnection();
+            OpenConnection();
             try
             {
-                int count = int.Parse(mycommand.ExecuteScalar().ToString());
-                return count>0;
+                int Count = int.Parse(MyCommand.ExecuteScalar().ToString());
+                return Count>0;
             }
 
             catch (Exception err)
@@ -48,17 +48,17 @@ namespace DataAccess
             }
             finally
             {
-                myconnection.Close();
+                MyConnection.Close();
             }
         }
 
-        public DataRow find(string errMessage)
+        public DataRow Find(string errMessage)
         {
-            openconnection();
+            OpenConnection();
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(mycommand.ExecuteReader());
+                dt.Load(MyCommand.ExecuteReader());
                 return dt.Rows[0];
                 
             }
@@ -68,17 +68,17 @@ namespace DataAccess
             }
             finally
             {
-                myconnection.Close();
+                MyConnection.Close();
             }
         }
 
-        public int insert(string errMessage)
+        public int Insert(string errMessage)
         {
-            openconnection();
+            OpenConnection();
             try
             {
-                int id = int.Parse(mycommand.ExecuteScalar().ToString());
-                return id;
+                int Id = int.Parse(MyCommand.ExecuteScalar().ToString());
+                return Id;
             }
             catch (Exception err)
             {
@@ -86,17 +86,17 @@ namespace DataAccess
             }
             finally
             {
-                myconnection.Close();
+                MyConnection.Close();
             }
         }
 
-        public DataTable list(string errMessage)
+        public DataTable List(string errMessage)
         {
-            openconnection();
+            OpenConnection();
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(mycommand.ExecuteReader());
+                dt.Load(MyCommand.ExecuteReader());
                 return dt;
             }
             catch (Exception err)
@@ -105,16 +105,16 @@ namespace DataAccess
             }
             finally
             {
-                myconnection.Close();
+                MyConnection.Close();
             }
         }
 
-        public void update(string errMessage)
+        public void Update(string errMessage)
         {
-            openconnection();
+            OpenConnection();
             try
             {
-                mycommand.ExecuteNonQuery(); //ejecuta algo pero devuelve un int con la cant de registros afectados
+                MyCommand.ExecuteNonQuery(); //ejecuta algo pero devuelve un int con la cant de registros afectados
                
             }
             catch (Exception err)
@@ -123,45 +123,45 @@ namespace DataAccess
             }
             finally
             {
-                myconnection.Close();
+                MyConnection.Close();
             }
         }
 
-        public void createcommand(string storedprocedure)
+        public void CreateCommand(string storedprocedure)
         {
-            mycommand = new SqlCommand(storedprocedure, myconnection);
-            mycommand.CommandType = CommandType.StoredProcedure;
+            MyCommand = new SqlCommand(storedprocedure, MyConnection);
+            MyCommand.CommandType = CommandType.StoredProcedure;
         }
 
-        public void parameteraddvarchar(string nombre, int length, string value)
+        public void ParameterAddVarchar(string nombre, int length, string value)
         {
-            mycommand.Parameters.Add("@" + nombre, SqlDbType.VarChar, length).Value = value;
+            MyCommand.Parameters.Add("@" + nombre, SqlDbType.VarChar, length).Value = value;
 
         }
 
-        public void parameteraddint(string nombre, int value)
+        public void ParameterAddInt(string nombre, int value)
         {
-            mycommand.Parameters.Add("@" + nombre, SqlDbType.Int).Value = value;
+            MyCommand.Parameters.Add("@" + nombre, SqlDbType.Int).Value = value;
         }
 
-        public void parameteradddatetime(string nombre, DateTime value)
+        public void ParameterAddDatetime(string nombre, DateTime value)
         {
-            mycommand.Parameters.Add("@" + nombre, SqlDbType.SmallDateTime).Value = value.ToString();
+            MyCommand.Parameters.Add("@" + nombre, SqlDbType.SmallDateTime).Value = value.ToString();
         }
 
-        public void parameteraddfloat(string nombre, double value)
+        public void ParameterAddFloat(string nombre, double value)
         {
-            mycommand.Parameters.Add("@" + nombre, SqlDbType.Float).Value = value;
+            MyCommand.Parameters.Add("@" + nombre, SqlDbType.Float).Value = value;
         }
 
-        public void parameteraddbool(string nombre, bool value)
+        public void ParameterAddBool(string nombre, bool value)
         {
-            mycommand.Parameters.Add("@" + nombre, SqlDbType.Bit).Value = value;
+            MyCommand.Parameters.Add("@" + nombre, SqlDbType.Bit).Value = value;
         }
 
-        public void parameteraddtext(string nombre, string value)
+        public void ParameterAddText(string nombre, string value)
         {
-            mycommand.Parameters.Add("@" + nombre, SqlDbType.Text).Value = value;
+            MyCommand.Parameters.Add("@" + nombre, SqlDbType.Text).Value = value;
         }
     }
 }
